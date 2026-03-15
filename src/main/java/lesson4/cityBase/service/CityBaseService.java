@@ -52,4 +52,4 @@ public class CityBaseService {
     public void deleteCity(Integer id) {
         cityRepository.deleteById(id);
     }
-}
+
