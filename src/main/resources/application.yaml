@@ -10,7 +10,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
 
   liquibase:
     change-log: classpath:db_mini_dump_lesson4/db.changelog-master.xml
