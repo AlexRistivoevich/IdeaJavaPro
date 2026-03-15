@@ -53,12 +53,3 @@ public class CityBaseService {
         cityRepository.deleteById(id);
     }
 
-    @Transactional
-    public void updatePopulation(Integer cityId, Long population) {
-
-        City city = cityRepository.findById(cityId)
-                .orElseThrow(() -> new RuntimeException("City not found"));
-
-        city.setPopulation(population);
-    }
-}
