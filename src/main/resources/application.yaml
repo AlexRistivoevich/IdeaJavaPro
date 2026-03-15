@@ -1,6 +1,16 @@
 spring:
   application:
     name: spring
-app:
-  cache:
-    enabled: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: root
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+  liquibase:
+    change-log: classpath:db_mini_dump_lesson4/db.changelog-master.xml
