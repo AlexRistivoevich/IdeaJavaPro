@@ -1,15 +1,13 @@
 package lesson4.cityBase.dao.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "cities")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 public class City {
 
     @Id
@@ -18,10 +16,8 @@ public class City {
 
     private String code;
 
-    @Column(name = "name_en")
     private String nameEn;
 
-    @Column(name = "name_ru")
     private String nameRu;
 
     private Long population;
