@@ -1,0 +1,16 @@
+<changeSet id="3" author="alex">
+
+    <insert tableName="regions">
+        <column name="region_code" value="RU-MOW"/>
+        <column name="region_name_en" value="Moscow Region"/>
+    </insert>
+
+    <insert tableName="cities">
+        <column name="code" value="MSK"/>
+        <column name="name_en" value="Moscow"/>
+        <column name="name_ru" value="Москва"/>
+        <column name="population" value="13000000"/>
+        <column name="region_id" value="1"/>
+    </insert>
+
+</changeSet>

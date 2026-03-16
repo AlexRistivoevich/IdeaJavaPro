@@ -1,0 +1,14 @@
+<changeSet id="1" author="alex">
+
+    <createTable tableName="regions">
+
+        <column name="id" type="serial">
+            <constraints primaryKey="true"/>
+        </column>
+
+        <column name="region_code" type="varchar(10)"/>
+        <column name="region_name_en" type="varchar(255)"/>
+
+    </createTable>
+
+</changeSet>
