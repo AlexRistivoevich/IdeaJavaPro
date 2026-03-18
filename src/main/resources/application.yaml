@@ -13,4 +13,8 @@ spring:
       ddl-auto: validate
 
   liquibase:
-    change-log: classpath:db_mini_dump_lesson4/db.changelog-master.xml
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

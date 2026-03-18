@@ -1,23 +1,23 @@
 <changeSet id="2" author="alex">
-
     <createTable tableName="cities">
-
         <column name="id" type="serial">
             <constraints primaryKey="true"/>
         </column>
-
-        <column name="code" type="varchar(10)"/>
-
-        <column name="name_en" type="varchar(255)"/>
-
-        <column name="name_ru" type="varchar(255)"/>
-
-        <column name="population" type="bigint"/>
-
+        <column name="code" type="varchar(10)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="name_en" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="name_ru" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="population" type="bigint">
+            <constraints nullable="false"/>
+        </column>
         <column name="region_id" type="int">
             <constraints nullable="false"/>
         </column>
-
     </createTable>
 
     <addForeignKeyConstraint
@@ -26,5 +26,4 @@
             referencedTableName="regions"
             referencedColumnNames="id"
             constraintName="fk_city_region"/>
-
 </changeSet>

@@ -4,6 +4,10 @@ import lesson4.cityBase.dao.CityRepository;
 import lesson4.cityBase.dao.RegionRepository;
 import lesson4.cityBase.dao.model.City;
 import lesson4.cityBase.dao.model.Region;
+import lesson4.cityBase.dto.CreateCityRequest;
+import lesson4.cityBase.dto.CreateRegionRequest;
+import lesson4.cityBase.exception.BadRequestException;
+import lesson4.cityBase.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,29 +22,30 @@ public class CityBaseService {
     private final RegionRepository regionRepository;
 
     @Transactional
-    public void addRegion(String code, String name) {
-
+    public Region addRegion(CreateRegionRequest request) {
         Region region = new Region();
-        region.setRegionCode(code);
-        region.setRegionNameEn(name);
-
-        regionRepository.save(region);
+        region.setRegionCode(request.getCode());
+        region.setRegionNameEn(request.getName());
+        return regionRepository.save(region);
     }
 
     @Transactional
-    public void addCity(String code, String nameEn, String nameRu, Long population, Integer regionId) {
+    public City addCity(CreateCityRequest request) {
+        if (cityRepository.findByCode(request.getCode()).isPresent()) {
+            throw new BadRequestException("Город с кодом " + request.getCode() + " уже существует");
+        }
 
-        Region region = regionRepository.findById(regionId)
-                .orElseThrow(() -> new RuntimeException("Region not found"));
+        Region region = regionRepository.findById(request.getRegionId())
+                .orElseThrow(() -> new NotFoundException("Регион с id=" + request.getRegionId() + " не найден"));
 
         City city = new City();
-        city.setCode(code);
-        city.setNameEn(nameEn);
-        city.setNameRu(nameRu);
-        city.setPopulation(population);
+        city.setCode(request.getCode());
+        city.setNameEn(request.getNameEn());
+        city.setNameRu(request.getNameRu());
+        city.setPopulation(request.getPopulation());
         city.setRegion(region);
 
-        cityRepository.save(city);
+        return cityRepository.save(city);
     }
 
     @Transactional(readOnly = true)
@@ -50,6 +55,9 @@ public class CityBaseService {
 
     @Transactional
     public void deleteCity(Integer id) {
+        if (!cityRepository.existsById(id)) {
+            throw new NotFoundException("Город с id=" + id + " не найден");
+        }
         cityRepository.deleteById(id);
     }
 }
